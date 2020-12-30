@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
 </head>
+
 <body>
-    <h1>Weather App</h1>
-    <form>
-        
-    </form>
+    <h1>Weather Dashboard</h1>
+    <div class="row">
+        <ul class="list-group" id="city-list">
+
+        </ul>
+    </div>
+    <div class="row">
+        <form class="input-group mb-3">
+            <input type="text" class="form-control" id="city-name" placeholder="City Name">
+            <button type="button" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    <div class="row" id="current-weather">
+        <div class="card text-center">
+            <div class="card-body">
+                <h3 class="card-title" id="current-day">THIS IS THE TITLE</h3>
+                <p class="card-text" id=current-day-data>Djklfdajifdoasfo</p>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="forecast">
+        <div class="card text-center" style="width: 10rem;">
+            <div class="card-body">
+                <h3 class="card-title" id="day-one"></h3>
+                <p class="card-text" id=day-one-data></p>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="script copy.js"></script>
 </html>
