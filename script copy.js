@@ -1,9 +1,10 @@
 $(document).ready(function () {
 
+    renderHistory()
 
     //  call current weather data from API
     $(".btn").on("click", function () {
-        
+
         var city = $("#city-name").val()
         // event.preventDefault();
         // console.log(city);
@@ -18,7 +19,7 @@ $(document).ready(function () {
                 var lon = data.coord.lon
                 var coord = [lat, lon]
                 // var history = {city: city, coord: coord}
-                
+
                 $.ajax({
                     url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&units=imperial&appid=12242d04509695b0bf9c4a41c4c13e11",
                     method: "GET",
@@ -32,7 +33,7 @@ $(document).ready(function () {
 
                 // console.log(searchHistory)
 
-           });
+            });
 
         }
         else {
@@ -40,11 +41,11 @@ $(document).ready(function () {
         }
     });
 
-// function showCurrentWeather() {
-//     console.log(data.current.temp);
-//     return "<h3>Temperature:" + data.current.temp + "&deg;F<h3>";
-    
-// }
+    // function showCurrentWeather() {
+    //     console.log(data.current.temp);
+    //     return "<h3>Temperature:" + data.current.temp + "&deg;F<h3>";
+
+    // }
 
     // history list
     // var cities = []
@@ -79,4 +80,22 @@ function showCurrentWeather(data) {
 
 function showForecast(data) {
     console.log(data.daily[1].temp.min, data.daily[1].temp.max)
+}
+
+function renderHistory() {
+    var searchHistory = Object.entries(localStorage)
+    console.log(typeof(searchHistory))
+    console.log(typeof(searchHistory[0]))
+    console.log(searchHistory);
+    
+    for (var i = 0; i < searchHistory.length; i++) {
+        var cities = [(searchHistory[i][0])];
+        console.log(cities);
+        $.each(cities, function([i], value) {
+            $("<li>", {'text': value}).appendTo("#search-history")
+        })
+
+        $("#search-history").createElement("<li>").addClass("list-group-item").html(searchHistory[i][0]);
+        // $("<li>").addClass("list-group-item").html(searchHistory[i][0]);
+    }
 }
