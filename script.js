@@ -27,11 +27,31 @@ function getCurrentWeather() {
                 // get city info from data
                 var cityName = $("<h3>").text(data.city.name);
                 var weatherIcon = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.list[0].weather[0].icon + "@2x.png");
-                var cityTemp = $("<p>").text("Temperature: " + data.list[0].main.temp + "&deg;F");
+                var cityTemp = $("<p>").text("Temperature: " + data.list[0].main.temp + " degrees F");
                 var cityHumidity = $("<p>").text("Humidity: " + data.list[0].main.humidity + "%");
                 var windSpeed = $("<p>").text("Wind Speed: " + data.list[0].wind.speed + "MPH");
                 // console.log(cityName, weatherIcon, cityTemp, cityHumidity, windSpeed)
                 currentWeather.append(cityName.append(weatherIcon), cityTemp, cityHumidity, windSpeed);
+
+                // new call with lat and lon
+                $.ajax({
+                    url: "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,hourly,alerts&units=imperial&appid=12242d04509695b0bf9c4a41c4c13e11",
+                    method: "GET",
+                }).then(function(results) {
+                    console.log(results)
+                    var uvIndex = $("<p>").text("UV Index: " + results.current.uvi).attr("id", "uv");
+                    currentWeather.append(uvIndex)
+                    // get forecast data from results
+                    var dailyForecast = results.daily
+                    // for loop through days 1-5
+                    for (var i = 1; i < 6; i++) {
+                        // make card for each day
+                        var forecastCard = $("<div>").attr("class", "card col-sm-4");
+                        // get daily data from results
+                        var forecastDate = $("<h5>").text(moment().add(i, 'days').format("L"));
+                        var forecastIcon = 
+                    }
+                })
             })
             // console.log(url)
         }
