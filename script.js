@@ -68,8 +68,20 @@ function renderHistory() {
     // clear any previous cities stored
     searchHistory.empty();
     historyArray = JSON.parse(localStorage.getItem("history"));
+    if (historyArray === null) {
+        return
+    } else {
+        // loop over stored data and create button for each
+        for (var i = 0; i < historyArray.length; i++){
+            var historyButton = $("<button>").text(historyArray[i]);
+            searchHistory.append(historyButton);
+        }
+    }
 }
 
+function weatherFromHistory() {
+    
+}
 $(document).ready(function () {
     $("#searchButton").on("click", function () {
         getWeather();
