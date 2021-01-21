@@ -25,12 +25,13 @@ function getCurrentWeather() {
                 lat = data.city.coord.lat;
                 lon = data.city.coord.lon;
                 // get city info from data
-                var cityName = $("<h3").text(data.city.name);
-                var weatherIcon = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.list[0].weather[0].weatherIcon + "@2x.png"
-                var cityTemp = data.list[0].main.temp;
-                var cityHumidity = data.list[0].main.humidity;
-                var windSpeed = data.list[0].wind.speed;
-
+                var cityName = $("<h3>").text(data.city.name);
+                var weatherIcon = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.list[0].weather[0].icon + "@2x.png");
+                var cityTemp = $("<p>").text("Temperature: " + data.list[0].main.temp + "&deg;F");
+                var cityHumidity = $("<p>").text("Humidity: " + data.list[0].main.humidity + "%");
+                var windSpeed = $("<p>").text("Wind Speed: " + data.list[0].wind.speed + "MPH");
+                // console.log(cityName, weatherIcon, cityTemp, cityHumidity, windSpeed)
+                currentWeather.append(cityName.append(weatherIcon), cityTemp, cityHumidity, windSpeed);
             })
             // console.log(url)
         }
